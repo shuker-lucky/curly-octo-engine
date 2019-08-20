@@ -1,0 +1,70 @@
+package com.beichende.ibank.terminal.systemclear.dao;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.beichende.ibank.adm.base.AdmbaseDao;
+import com.beichende.ibank.entity.DeviceClearModel;
+import com.beichende.ibank.entity.EditProductInfo;
+import com.beichende.ibank.entity.ModelPartRelation;
+import com.beichende.ibank.entity.VoucherDetailModel;
+import com.beichende.ibank.entity.VoucherInfoModel;
+import com.beichende.ibank.terminal.systemclear.web.dto.VoucherInfoDto;
+import com.beichende.ibank.util.TimeUtil;
+
+/**
+ * 相关Dao层
+ * @author 
+ * @version 版本号 1.0.0
+ * @filename ClearDeviceDao.java
+ * @time 2016-9-22 下午7:34:14
+ * @copyright(C) 2015 
+ */
+@Service
+public class ClearDeviceDao {
+	
+	private Logger logger = LoggerFactory.getLogger(ClearDeviceDao.class);
+	@Resource
+	private AdmbaseDao baseDao;
+	
+	/**
+	 * 保存重空入库机构凭证信息对象
+	 * @param setOfvim 机构凭证信息对象
+	 * @return 操作是否成功。
+	 */
+	public boolean voucherExportVim(Session session,Set<Object> setOfvim ){
+		boolean flag = true;
+		try {
+			baseDao.saveAll(setOfvim);
+//			for (Object entity : setOfvim) {				
+//				baseDao.saveEntityRecord(session, entity);
+//				session.flush();
+//				session.clear();
+//			}
+		} catch (Exception e) {
+			flag = false;
+			logger.error("保存机构凭证信息对象异常【"+e.getMessage(),e);
+		}
+		return flag;
+	}
+	
+	
+	
+	
+	
+	
+	
+}
